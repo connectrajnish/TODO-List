@@ -11,6 +11,7 @@ exports.getAllTODO = async (req, res) => {
 
 exports.postCreateTODO = async (req, res) => {
     try {
+        // console.log(req.body);
         const data = await TODO.create(req.body);
         return res.status(200).json({ message: "Todo added successfully", data });
     } catch (err) {
