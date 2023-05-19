@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ShowTODOList from './showTODO'
 
 const CreateTODO = () => {
-    const [refreshList, setRefreshList] = useState(false);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -14,8 +13,7 @@ const CreateTODO = () => {
         axios
             .post("http://localhost:8080/api/todo", requestData)
             .then((res) => {
-                // console.log(res.data.message);
-                setRefreshList(true);
+                console.log(res.data.message);
             })
             .catch((err) => {
                 console.log("Error in creating todo: ", err);
@@ -50,7 +48,6 @@ const CreateTODO = () => {
                     </button>
                 </div>
             </form>
-            <ShowTODOList refreshList={refreshList} />
         </div>
     );
 };

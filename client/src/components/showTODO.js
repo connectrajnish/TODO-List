@@ -25,9 +25,9 @@ const TODOCard = ({ data }) => {
   );
 };
 
-const ShowTODOList = ({refreshList}) => {
-  const [TODO, setTODO] = useState([]);
+const ShowTODOList = () => {
   const [loading, setLoading] = useState(true);
+  const [TODO, setTODO] = useState([]);
 
   useEffect(() => {
     setTODO([]);
@@ -41,7 +41,7 @@ const ShowTODOList = ({refreshList}) => {
         console.log(err);
         setLoading(false);
       });
-  }, [refreshList]);
+  }, []);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -52,14 +52,12 @@ const ShowTODOList = ({refreshList}) => {
   }
 
   return (
-    <section className="my-5">
-      <section className="contents">
+    <section className="my-4">
         <ul className="list-container">
           {TODO.map((data) => (
             <TODOCard data={data} key={data._id} />
           ))}
         </ul>
-      </section>
     </section>
   );
 };

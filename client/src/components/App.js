@@ -6,20 +6,16 @@ import ShowTODOList from "./showTODO";
 import CreateTODO from "./createTODO";
 
 const App = () => {
-    return (
-        <div className="flex flex-col h-screen">
-            <Header />
-            <div className="flex-grow">
-            <CreateTODO/>
-            <ShowTODOList />
-                {/* <BrowserRouter>
-                    <Route exact path="/" component={ShowTODOList}/>
-                    <Route path="/create-todo" component={CreateTODO}/>
-                </BrowserRouter> */}
-            </div>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className="flex flex-col h-screen">
+      <Header />
+      <CreateTODO/>
+      <div className="flex-grow overflow-y-auto">
+        <ShowTODOList />
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 export default App;
