@@ -25,16 +25,15 @@ const TODOCard = ({ data }) => {
   );
 };
 
-const ShowTODOList = () => {
+const ShowTODOList = ({loadTODO, TODO}) => {
   const [loading, setLoading] = useState(true);
-  const [TODO, setTODO] = useState([]);
 
   useEffect(() => {
-    setTODO([]);
+    loadTODO([]);
     axios
       .get("http://localhost:8080/api/todo/")
       .then((res) => {
-        setTODO(res.data);
+        loadTODO(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -48,17 +47,19 @@ const ShowTODOList = () => {
   }
 
   if (TODO.length === 0) {
-    return <p>No TODO items found.</p>;
+    return <p className="text-center text-gray-500 mt-4">Every accomplishment starts with the decision to try.</p>;
   }
+  
 
   return (
-    <section className="my-4">
-        <ul className="list-container">
-          {TODO.map((data) => (
-            <TODOCard data={data} key={data._id} />
-          ))}
-        </ul>
-    </section>
+    <section className="my-4 shadow-md">
+  <ul className="bg-white rounded-lg shadow-sm">
+    {TODO.map((data) => (
+      <TODOCard data={data} key={data._id} />
+    ))}
+  </ul>
+</section>
+
   );
 };
 

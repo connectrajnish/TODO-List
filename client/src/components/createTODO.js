@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const CreateTODO = () => {
+const CreateTODO = ({onCreateTODO}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,7 +13,8 @@ const CreateTODO = () => {
         axios
             .post("http://localhost:8080/api/todo", requestData)
             .then((res) => {
-                console.log(res.data.message);
+                // console.log("from creation",res.data);
+                onCreateTODO(res.data.data);
             })
             .catch((err) => {
                 console.log("Error in creating todo: ", err);
