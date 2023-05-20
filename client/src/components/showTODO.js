@@ -14,7 +14,9 @@ const TODOCard = ({ data }) => {
         {/* <p className="text-sm mt-2">{description}</p> */}
       </div>
       <div className="flex items-end ml-auto">
-        <button className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300">
+        <button
+          className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300"
+        >
           Edit
         </button>
         <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300">
@@ -25,7 +27,7 @@ const TODOCard = ({ data }) => {
   );
 };
 
-const ShowTODOList = ({loadTODO, TODO}) => {
+const ShowTODOList = ({ loadTODO, TODO }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,16 +51,16 @@ const ShowTODOList = ({loadTODO, TODO}) => {
   if (TODO.length === 0) {
     return <p className="text-center text-gray-500 mt-4">Every accomplishment starts with the decision to try.</p>;
   }
-  
+
 
   return (
     <section className="my-4 shadow-md">
-  <ul className="bg-white rounded-lg shadow-sm">
-    {TODO.map((data) => (
-      <TODOCard data={data} key={data._id} />
-    ))}
-  </ul>
-</section>
+      <ul className="bg-white rounded-lg shadow-sm">
+        {TODO.map((data) => (
+          <TODOCard data={data} key={data._id} />
+        ))}
+      </ul>
+    </section>
 
   );
 };

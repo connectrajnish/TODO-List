@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from './header';
 import Footer from './footer';
@@ -21,7 +21,7 @@ const App = () => {
             <Header />
             <CreateTODO onCreateTODO={handleAddTODO} />
             <div className="flex-grow overflow-y-auto m-2">
-                <ShowTODOList loadTODO={loadTODO} TODO={TODO}/>
+                <ShowTODOList loadTODO={loadTODO} TODO={TODO} />
             </div>
             <Footer />
         </div>
