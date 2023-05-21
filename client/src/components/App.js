@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
 import Header from './header';
 import Footer from './footer';
 import ShowTODOList from './showTODO';
@@ -9,6 +8,7 @@ import UpdateTODO from "./updateTODO";
 const App = () => {
     const [TODO, setTODO] = useState([]);
     const [editModal, setEditModal] = useState(false);
+    const [updateId, setUpdateId] = useState(null);
 
     const loadTODO = (data) => {
         setTODO(data);
@@ -16,9 +16,24 @@ const App = () => {
     const handleAddTODO = (newTODO) => {
         setTODO([...TODO, newTODO]);
     };
+    const handleUpdateTODO = (updateId, updatedTODO) => {
+        const updatedArray = TODO.map((data) => {
+            if (data._id === updateId) {
+                data.title = updatedTODO.title;
+                data.description = updatedTODO.description;
+            }
+            return data;
+        })
+        setTODO(updatedArray);
+        console.log(updatedArray);
+    };
 
     const handleEditButton = () => {
         setEditModal(!editModal);
+    };
+
+    const handleEditTODO = (_id) => {
+        setUpdateId(_id);
     };
 
     return (
@@ -27,7 +42,7 @@ const App = () => {
                 <div>
                     <div className="fixed inset-0 flex items-center justify-center bg-slate-500 opacity-70"></div>
                     <div className="relative">
-                        <UpdateTODO handleEditButton={handleEditButton} />
+                        <UpdateTODO handleEditButton={handleEditButton} updateId={updateId} onCreateTODO={handleUpdateTODO} />
                     </div>
                 </div>
 
@@ -36,7 +51,7 @@ const App = () => {
                 <Header />
                 <CreateTODO onCreateTODO={handleAddTODO} />
                 <div className="flex-grow overflow-y-auto my-2">
-                    <ShowTODOList loadTODO={loadTODO} TODO={TODO} handleEditButton={handleEditButton} />
+                    <ShowTODOList loadTODO={loadTODO} TODO={TODO} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} />
                 </div>
                 <Footer />
             </div>

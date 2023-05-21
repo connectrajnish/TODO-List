@@ -1,4 +1,26 @@
-const updateTODO = ({ handleEditButton }) => {
+import { useState } from 'react';
+import axios from 'axios';
+
+const updateTODO = ({ handleEditButton, updateId, onCreateTODO }) => {
+
+    const handleUpdate = (e) => {
+        const data = {
+            title: e.target.elements.title.value,
+            description: e.target.elements.description.value,
+        };
+        axios
+            .put(`http://localhost:8080/api/todo/${updateId}`, data)
+            .then((res) => {
+                onCreateTODO(updateId, data);
+            })
+            .catch((err) => {
+                console.log("Failed to update");
+                console.log(err.message);
+            })
+        e.target.reset();
+    }
+
+
     return (
         <div>
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -21,17 +43,37 @@ const updateTODO = ({ handleEditButton }) => {
                         </svg>
                     </button>
                 </div>
-                <p>content goes here</p>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                <div>
+                    <form className="w-full" onSubmit={(e) => {
+                        handleUpdate(e);
+                        handleEditButton();
+                    }}>
+                        <div className="flex justify-between">
+                            <input
+                                type="text"
+                                placeholder="Title..."
+                                name="title"
+                                className="w-full p-2 m-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-300"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Description..."
+                                name="description"
+                                className="w-full p-2 m-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-300"
+                            />
+                        </div>
+                        <div className="flex justify-center items-center p-6 rounded-b">
 
-                    <button
-                        className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300"
-                        type="button"
-                        onClick={() => handleEditButton()}
-                    >
-                        Submit
-                    </button>
+                            <button
+                                className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300"
+                                type="submit"
+                            >
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
         </div>
     )

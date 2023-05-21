@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 
-const CreateTODO = ({onCreateTODO}) => {
-    
+const CreateTODO = ({ onCreateTODO }) => {
+
     const handleSubmit = (e) => {
         e.preventDefault();
 

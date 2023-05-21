@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const TODOCard = ({ data, handleEditButton }) => {
+const TODOCard = ({ data, handleEditButton, handleEditTODO }) => {
   const { _id, title, description } = data;
 
   return (
@@ -16,7 +16,7 @@ const TODOCard = ({ data, handleEditButton }) => {
       <div className="flex items-end ml-auto">
         <button
           className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300"
-          onClick={() => handleEditButton()}
+          onClick={() => { handleEditButton(); handleEditTODO(_id) }}
         >
           Edit
         </button>
@@ -28,7 +28,7 @@ const TODOCard = ({ data, handleEditButton }) => {
   );
 };
 
-const ShowTODOList = ({ loadTODO, TODO, handleEditButton }) => {
+const ShowTODOList = ({ loadTODO, TODO, handleEditButton, handleEditTODO }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,20 +53,20 @@ const ShowTODOList = ({ loadTODO, TODO, handleEditButton }) => {
     return <div>
       <p className="text-center text-gray-500 mt-4">Every accomplishment starts with the decision to try.</p>;
       <p className="text-center text-gray-500">Add some task TODO</p>;
-      </div>
+    </div>
   }
 
 
-      return (
-      <section className="my-4 shadow-md">
-        <ul className="bg-white rounded-lg shadow-sm">
-          {TODO.map((data) => (
-            <TODOCard data={data} key={data._id} handleEditButton={handleEditButton} />
-          ))}
-        </ul>
-      </section>
+  return (
+    <section className="my-4 shadow-md">
+      <ul className="bg-white rounded-lg shadow-sm">
+        {TODO.map((data) => (
+          <TODOCard data={data} key={data._id} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} />
+        ))}
+      </ul>
+    </section>
 
-      );
+  );
 };
 
-      export default ShowTODOList;
+export default ShowTODOList;
