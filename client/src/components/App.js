@@ -4,9 +4,11 @@ import Header from './header';
 import Footer from './footer';
 import ShowTODOList from './showTODO';
 import CreateTODO from './createTODO';
+import UpdateTODO from "./updateTODO";
 
 const App = () => {
     const [TODO, setTODO] = useState([]);
+    const [editModal, setEditModal] = useState(false);
 
     const loadTODO = (data) => {
         setTODO(data);
@@ -15,15 +17,29 @@ const App = () => {
         setTODO([...TODO, newTODO]);
     };
 
+    const handleEditButton = () => {
+        setEditModal(!editModal);
+    };
 
     return (
-        <div className="flex flex-col h-screen">
-            <Header />
-            <CreateTODO onCreateTODO={handleAddTODO} />
-            <div className="flex-grow overflow-y-auto m-2">
-                <ShowTODOList loadTODO={loadTODO} TODO={TODO} />
+        <div>
+            {editModal &&
+                <div>
+                    <div className="fixed inset-0 flex items-center justify-center bg-slate-500 opacity-70"></div>
+                    <div className="relative">
+                        <UpdateTODO handleEditButton={handleEditButton} />
+                    </div>
+                </div>
+
+            }
+            <div className="flex flex-col h-screen">
+                <Header />
+                <CreateTODO onCreateTODO={handleAddTODO} />
+                <div className="flex-grow overflow-y-auto my-2">
+                    <ShowTODOList loadTODO={loadTODO} TODO={TODO} handleEditButton={handleEditButton} />
+                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 };
