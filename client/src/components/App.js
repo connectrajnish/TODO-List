@@ -45,7 +45,7 @@ const App = () => {
 
 
     return (
-        <div>
+        <div className="font-serif">
             {editModal &&
                 <div>
                     <div className="fixed inset-0 flex items-center justify-center bg-slate-500 opacity-70"></div>
