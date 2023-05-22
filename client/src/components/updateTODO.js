@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const updateTODO = ({ handleEditButton, updateId, onCreateTODO }) => {
+const updateTODO = ({ handleEditButton, updateId, onCreateTODO, updateData }) => {
+    const [title, setTitle] = useState(updateData.title);
+    const [description, setDescription] = useState(updateData.description);
 
     const handleUpdate = (e) => {
         const data = {
@@ -22,7 +24,8 @@ const updateTODO = ({ handleEditButton, updateId, onCreateTODO }) => {
 
 
     return (
-        <div>
+        <div className="flex justify-center items-center p-2 m-2 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex justify-end mr-4 mt-2">
                     <button
@@ -54,12 +57,16 @@ const updateTODO = ({ handleEditButton, updateId, onCreateTODO }) => {
                                 placeholder="Title..."
                                 name="title"
                                 className="w-full p-2 m-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-300"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                             <input
                                 type="text"
                                 placeholder="Description..."
                                 name="description"
                                 className="w-full p-2 m-2 border border-gray-300 rounded focus:outline-none focus:border-yellow-300"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                             />
                         </div>
                         <div className="flex justify-center items-center p-6 rounded-b">
@@ -73,7 +80,6 @@ const updateTODO = ({ handleEditButton, updateId, onCreateTODO }) => {
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     )
