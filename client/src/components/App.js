@@ -9,6 +9,7 @@ const App = () => {
     const [TODO, setTODO] = useState([]);
     const [editModal, setEditModal] = useState(false);
     const [updateId, setUpdateId] = useState(null);
+    const [updateData, setUpdateData] = useState({});
 
     const loadTODO = (data) => {
         setTODO(data);
@@ -25,24 +26,31 @@ const App = () => {
             return data;
         })
         setTODO(updatedArray);
-        console.log(updatedArray);
     };
 
     const handleEditButton = () => {
         setEditModal(!editModal);
     };
 
-    const handleEditTODO = (_id) => {
-        setUpdateId(_id);
+    const handleEditTODO = (id, data) => {
+        setUpdateId(id);
+        setUpdateData(data);
     };
+
+    const handleDeleteTODO = (id) => {
+        const updatedTODO = TODO.filter((todo) => todo._id !== id);
+        setTODO(updatedTODO);
+        console.log(updatedTODO)
+    };
+
 
     return (
         <div>
             {editModal &&
                 <div>
                     <div className="fixed inset-0 flex items-center justify-center bg-slate-500 opacity-70"></div>
-                    <div className="relative">
-                        <UpdateTODO handleEditButton={handleEditButton} updateId={updateId} onCreateTODO={handleUpdateTODO} />
+                    <div className="relative transition-all ease-in duration-300">
+                        <UpdateTODO handleEditButton={handleEditButton} updateId={updateId} onCreateTODO={handleUpdateTODO} updateData={updateData} />
                     </div>
                 </div>
 
@@ -51,7 +59,7 @@ const App = () => {
                 <Header />
                 <CreateTODO onCreateTODO={handleAddTODO} />
                 <div className="flex-grow overflow-y-auto my-2">
-                    <ShowTODOList loadTODO={loadTODO} TODO={TODO} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} />
+                    <ShowTODOList loadTODO={loadTODO} TODO={TODO} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} handleDeleteTODO={handleDeleteTODO} />
                 </div>
                 <Footer />
             </div>

@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const TODOCard = ({ data, handleEditButton, handleEditTODO }) => {
+const handleDelete = (id, handleDeleteTODO) => {
+  axios
+    .delete(`http://localhost:8080/api/todo/${id}`)
+    .then((res) => {
+      handleDeleteTODO(id);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+
+const TODOCard = ({ data, handleEditButton, handleEditTODO, handleDeleteTODO }) => {
   const { _id, title, description } = data;
 
   return (
@@ -11,16 +23,23 @@ const TODOCard = ({ data, handleEditButton, handleEditTODO }) => {
     >
       <div>
         <h3 className="text-lg py-2">{title}</h3>
+        {/* make accrodian */}
         {/* <p className="text-sm mt-2">{description}</p> */}
       </div>
-      <div className="flex items-end ml-auto">
+      <div className="flex items-end ml-auto ml-min-2">
         <button
           className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-4 rounded mr-2 transition-colors duration-300"
-          onClick={() => { handleEditButton(); handleEditTODO(_id) }}
+          onClick={() => {
+            handleEditButton();
+            handleEditTODO(_id, data)
+          }}
         >
-          Edit
+          View
         </button>
-        <button className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300">
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300"
+          onClick={() => handleDelete(_id, handleDeleteTODO)}
+        >
           Delete
         </button>
       </div>
@@ -28,7 +47,7 @@ const TODOCard = ({ data, handleEditButton, handleEditTODO }) => {
   );
 };
 
-const ShowTODOList = ({ loadTODO, TODO, handleEditButton, handleEditTODO }) => {
+const ShowTODOList = ({ loadTODO, TODO, handleEditButton, handleEditTODO, handleDeleteTODO }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,8 +65,9 @@ const ShowTODOList = ({ loadTODO, TODO, handleEditButton, handleEditTODO }) => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="text-center">Loading...</p>;
   }
+
 
   if (TODO.length === 0) {
     return <div>
@@ -61,7 +81,7 @@ const ShowTODOList = ({ loadTODO, TODO, handleEditButton, handleEditTODO }) => {
     <section className="my-4 shadow-md">
       <ul className="bg-white rounded-lg shadow-sm">
         {TODO.map((data) => (
-          <TODOCard data={data} key={data._id} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} />
+          <TODOCard data={data} key={data._id} handleEditButton={handleEditButton} handleEditTODO={handleEditTODO} handleDeleteTODO={handleDeleteTODO} />
         ))}
       </ul>
     </section>
