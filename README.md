@@ -9,8 +9,8 @@ To update or to view in detail
 ## Prerequisites
 Before running the application, make sure you have the following installed on your machine:
 
--Node.js (v12 or above)
--MongoDB (local)
+* Node.js (v12 or above)
+* MongoDB (local)
 
 ## Installation
 1. Clone the repository:
@@ -22,10 +22,12 @@ Before running the application, make sure you have the following installed on yo
     cd server && npm install
     cd ../client && npm install
     
-3. MongoDB Connection:
-    If you have MongoDB installed locally, follow these steps:
-      Open MongoDB Compass and click on "New Connection".
-      Save the connection as TODO (save & connect).
+3. MongoDB Connection
+
+- If you have MongoDB installed locally, follow these steps:
+   * Open MongoDB Compass and click on "New Connection".
+   * Save the connection as "TODO" (save & connect).
+
 
 3. Start server in one of the terminal:
     The server will start running on http://localhost:8080.
@@ -49,12 +51,12 @@ Contributions are welcome! If you find any issues or want to enhance the applica
 This project is licensed under the MIT License.
 
 ## Acknowledgements
-MongoDB
-Express.js
-React
-Node.js
-Create React App
-React Router
+- MongoDB
+* Express.js
++ React
+- Node.js
+* Create React App
+- React Router
 
 ## Contact
 For any inquiries or questions, you can reach out to me at connectrajnish123@gmail.com
