@@ -6,13 +6,13 @@ The Todo App is a user-friendly task management application that helps you stay 
 To update or to view in detail
 ![Screenshot (44)](https://github.com/connectrajnish/TODO-List/assets/82881088/16581bc1-0f3d-40e1-8a8f-8353cee3c095)
 
-##Prerequisites
+## Prerequisites
 Before running the application, make sure you have the following installed on your machine:
 
 -Node.js (v12 or above)
 -MongoDB (local)
 
-##Installation
+## Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/connectrajnish/TODO-List.git
@@ -42,13 +42,13 @@ Before running the application, make sure you have the following installed on yo
     cd client 
     npm start
 
-##Contributing
+## Contributing
 Contributions are welcome! If you find any issues or want to enhance the application, feel free to submit a pull request. 
 
-##License
+## License
 This project is licensed under the MIT License.
 
-##Acknowledgements
+## Acknowledgements
 MongoDB
 Express.js
 React
@@ -56,5 +56,5 @@ Node.js
 Create React App
 React Router
 
-##Contact
-For any inquiries or questions, you can reach out to me at your-connectrajnish123@gmail.com
+## Contact
+For any inquiries or questions, you can reach out to me at connectrajnish123@gmail.com
